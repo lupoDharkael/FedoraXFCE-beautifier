@@ -16,28 +16,24 @@ dnf remove -y \
     pragha
 
 dnf install -y \
-    guake \
+    #@virtualization \
+    #gnome-packagekit-updater \
     gimp \
     htop \
-    terminator \
     git \
     preload \
     libreoffice \
     clementine \
+    tmux \
     gstreamer1-plugin-mpg123 \
     arc-theme \
     install numix-icon-theme-circle \
     paper-icon-theme \
     lightdm-gtk-greeter-settings \
     breeze-cursor-theme \
-    terminology
-    #dnf install @virtualization
-    #sudo dnf install gnome-packagekit-updater
     
 systemctl enable preload
 systemctl start preload
-
-cp /usr/share/applications/guake.desktop /etc/xdg/autostart/
 
 # modify bashrc
 echo "" >> $HOME_/.bashrc

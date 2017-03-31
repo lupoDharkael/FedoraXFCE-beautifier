@@ -17,7 +17,8 @@ xfconf-query -c xfce4-panel -p /panels/panel-1/autohide-behavior -t int -s 1 -n
 # shortcuts
 xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/Super_L -t string -s /usr/bin/xfce4-popup-whiskermenu -n
 
-xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/\<Primary\>\<Alt\>t -t string -s terminator -n
+xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/\<Primary\>\<Alt\>t -t string -s xfce4-terminal -n
+xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/F12 -t string -s 'xfce4-terminal --drop-down' -n
 
 #wallpaper
 xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s /usr/share/backgrounds/wallpaper.jpg -t string -n
