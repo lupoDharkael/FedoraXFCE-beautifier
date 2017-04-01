@@ -18,6 +18,7 @@ dnf remove -y \
 dnf install -y \
     gimp \
     vim \
+    mediawriter \
     htop \
     git \
     preload \
