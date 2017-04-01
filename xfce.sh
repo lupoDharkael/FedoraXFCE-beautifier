@@ -16,8 +16,6 @@ dnf remove -y \
     pragha
 
 dnf install -y \
-    #@virtualization \
-    #gnome-packagekit-updater \
     gimp \
     vim \
     htop \
@@ -42,15 +40,15 @@ echo "" >> $HOME_/.bashrc
 echo 'export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"' >> $HOME_/.bashrc
 
 # login conf
-sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/wallpaper.jpg\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/' /etc/lightdm/lightdm-gtk-greeter.conf
+sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/' /etc/lightdm/lightdm-gtk-greeter.conf
 
-#wget https://updates.tdesktop.com/tlinux/tsetup.1.0.14.tar.xz -P /tmp && mkdir $HOME_/.telegram && tar xf /tmp/tsetup.1.0.14.tar.xz -C $HOME_/.telegram/ --strip-components=1 && $HOME_/.telegram/Telegram 
+# deletes cached sessions
+rm -r $HOME_/.cache/sessions/
 
-# TODO Panel/Elements/Menu Whishker
-# TODO wallpaper(Unique xmatrix)
-
-# visuals
-su $1 -c 'xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark"
+su $1 -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false
+    
+    # visuals
+    xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark"
     xfconf-query -c xsettings -p /Net/IconThemeName -s "Paper"
     xfconf-query -c xsettings -p /Gtk/ButtonImages -s false
     xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "breeze_cursors"
@@ -59,7 +57,10 @@ su $1 -c 'xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark"
 
     # panels
     xfconf-query -c xfce4-panel -p /panels/panel-2/autohide-behavior -t int -s 1 -n
+    xfconf-query -c xfce4-panel -p /panels/panel-2/position -s "p=9;x=0;y=0"
     xfconf-query -c xfce4-panel -p /panels/panel-1/autohide-behavior -t int -s 1 -n
+    xfconf-query -c xfce4-panel -p /panels/panel-1/position -s "p=10;x=0;y=0"
+    xfconf-query -c xfce4-panel -p /plugins/plugin-1 -s "whiskermenu"
 
     # shortcuts
     xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/Super_L -t string -s /usr/bin/xfce4-popup-whiskermenu -n
