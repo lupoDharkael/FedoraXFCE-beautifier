@@ -6,11 +6,10 @@ HOME_="$(su $1 -c "echo ~")"
 
 #https://github.com/numixproject/numix-icon-theme-circle
  
-dnf copr enable numix/numix
 dnf config-manager --add-repo http://download.opensuse.org/repositories/home:snwh:paper/Fedora_25/home:snwh:paper.repo
 dnf upgrade -y
 dnf remove -y \
-    geany \
+    leafpad \
     abiword \
     gnumeric \
     pragha
@@ -28,16 +27,13 @@ dnf install -y \
     tmux \
     gstreamer1-plugin-mpg123 \
     arc-theme \
-    install numix-icon-theme-circle \
     paper-icon-theme \
     lightdm-gtk-greeter-settings \
-    breeze-cursor-theme \
-    
-systemctl enable preload
-systemctl start preload
+    breeze-cursor-theme &&
+systemctl enable preload && systemctl start preload
 
 # modify bashrc
-echo "" >> $HOME_/.bashrc
+echo "" >> $HOME_/.bashrc &&
 echo 'export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"' >> $HOME_/.bashrc
 
 # login conf
@@ -46,7 +42,7 @@ sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\nthe
 # deletes cached sessions
 rm -r $HOME_/.cache/sessions/
 
-su $1 -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false
+su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     
     # visuals
     xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark"
