@@ -50,23 +50,24 @@ rm -r $HOME/.cache/sessions/
 su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     
     # visuals
-    xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark"
-    xfconf-query -c xsettings -p /Net/IconThemeName -s "Paper"
-    xfconf-query -c xsettings -p /Gtk/ButtonImages -s false
-    xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "breeze_cursors"
-    xfconf-query -c xfwm4 -p /general/theme -s "Arc-Dark"
-    xfconf-query -c xsettings -p /Gtk/FontName -s "FreeSans 10"
+    xfconf-query -c xsettings -p /Net/ThemeName -s "Arc-Dark" -n
+    xfconf-query -c xsettings -p /Net/IconThemeName -s "Paper" -n
+    xfconf-query -c xsettings -p /Gtk/ButtonImages -s false -n
+    xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "breeze_cursors" -n
+    xfconf-query -c xfwm4 -p /general/theme -s "Arc-Dark" -n
+    xfconf-query -c xsettings -p /Gtk/FontName -s "FreeSans 10" -n
 
     # panels
-    xfconf-query -c xfce4-panel -p /panels/panel-2/autohide-behavior -t int -s 1 -n
-    xfconf-query -c xfce4-panel -p /panels/panel-2/position -s "p=9;x=0;y=0"
+    xfconf-query -c xfce4-panel -p /panels/panel-2/autohide-behavior -t int -s 2 -n
+    xfconf-query -c xfce4-panel -p /panels/panel-2/background-alpha -t int -s 60 -n
+    xfconf-query -c xfce4-panel -p /panels/panel-2/position -s "p=9;x=0;y=0" -n
     xfconf-query -c xfce4-panel -p /panels/panel-1/autohide-behavior -t int -s 1 -n
-    xfconf-query -c xfce4-panel -p /panels/panel-1/position -s "p=10;x=0;y=0"
-    xfconf-query -c xfce4-panel -p /plugins/plugin-1 -s "whiskermenu"
+    xfconf-query -c xfce4-panel -p /panels/panel-1/position -s "p=10;x=0;y=0" -n
+    xfconf-query -c xfce4-panel -p /plugins/plugin-1 -s "whiskermenu" -n
 
     # shortcuts
     xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/Super_L -t string -s /usr/bin/xfce4-popup-whiskermenu -n
-    xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/Print -s "xfce4-screenshooter -r -c"
+    xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/Print -s "xfce4-screenshooter -r -c" -n
     xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/\<Primary\>\<Alt\>t -t string -s xfce4-terminal -n
     xfconf-query -c xfce4-keyboard-shortcuts -p /commands/custom/F12 -t string -s "xfce4-terminal --drop-down" -n'
 
