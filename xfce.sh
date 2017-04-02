@@ -1,7 +1,5 @@
 #! /bin/bash
 
-HOME_="$(su $1 -c "echo ~")"
-
 #cp wallpaper.jpg /usr/share/backgrounds/
 
 #https://github.com/numixproject/numix-icon-theme-circle
@@ -33,14 +31,14 @@ dnf install -y \
 systemctl enable preload && systemctl start preload
 
 # modify bashrc
-echo "" >> $HOME_/.bashrc &&
-echo 'export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"' >> $HOME_/.bashrc
+echo "" >> $HOME/.bashrc &&
+echo 'export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"' >> $HOME/.bashrc
 
 # login conf
 sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/' /etc/lightdm/lightdm-gtk-greeter.conf
 
 # deletes cached sessions
-rm -r $HOME_/.cache/sessions/
+rm -r $HOME/.cache/sessions/
 
 su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     
