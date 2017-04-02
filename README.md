@@ -4,8 +4,11 @@ Script designed to make your Fedora XFCE good looking and complete.
 To run the script go to its folfer and execute this command in the terminal:
 
 sudo -E bash xfce.sh $USER
- 
-Requires restarting the system after the execution of the script due to problems with xfconf-query when executed with sudo
- 
 
+If you want aditional functionality check the "misc" folder:
+- compton (not working): installs the compton WM.
+- lighoffice (not working): configures libreoffice for a light theme.
+- telegram (working): installs Telegram Messenger.
+- updater (working): install a graphical software updater.
+- virt (working): installs virtualization software.
 *Tested on fedora 25 (XFCE spin)*
