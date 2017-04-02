@@ -1,0 +1,5 @@
+launch the script as:
+
+sudo -E bash compton.sh $USER
+
+NOT WORKING (not yet)
