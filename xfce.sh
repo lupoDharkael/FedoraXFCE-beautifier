@@ -30,6 +30,7 @@ dnf install -y \
 systemctl enable preload && systemctl start preload
 
 # modify bashrc
+echo "Configuring custom terminal prompt."
 echo "" >> $HOME/.bashrc &&
 echo 'export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"' >> $HOME/.bashrc
 
@@ -39,6 +40,7 @@ wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libre
 # http://askubuntu.com/questions/83605/how-do-i-export-customized-libreoffice-config-files#213757
 
 # set QT theme
+echo "Setting QT theme."
 dnf install -y qt5-qtstyleplugins qtcurve-qt5 qt5ct qgnomeplatform
 echo "" >> $HOME/.bashrc
 echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.bashrc
@@ -47,14 +49,18 @@ cp qt5ct.conf $HOME/.config/qt5ct/qt5ct.conf
 source $HOME/.bashrc
 
 # update locate database
+echo "Updating locate's database."
 updatedb
 
 # login conf
+echo "Configuring new loging theme."
 sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/' /etc/lightdm/lightdm-gtk-greeter.conf
 
 # deletes cached sessions
+echo "Deleting cached sessions."
 rm -r $HOME/.cache/sessions/
 
+echo "Configuring xfce4."
 su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     
     # visuals
@@ -88,3 +94,5 @@ su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     #wallpaper
     #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s /usr/share/backgrounds/wallpaper.jpg -t string -n
     #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /usr/share/backgrounds/wallpaper.jpg
+
+notify-send -i appointment -u critical "You may need to log out to enjoy the new configuration"
