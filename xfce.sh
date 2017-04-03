@@ -1,6 +1,6 @@
 #! /bin/bash
 
-#cp wallpaper.jpg /usr/share/backgrounds/
+#cp --remove-destination wallpaper.jpg /usr/share/backgrounds/
 
 #https://github.com/numixproject/numix-icon-theme-circle
  
@@ -45,12 +45,15 @@ dnf install -y qt5-qtstyleplugins qtcurve-qt5 qt5ct qgnomeplatform
 echo "" >> $HOME/.bashrc
 echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.bashrc
 mkdir $HOME/.config/qt5ct
-cp qt5ct.conf $HOME/.config/qt5ct/qt5ct.conf
+cp --remove-destination qt5ct.conf $HOME/.config/qt5ct/
 source $HOME/.bashrc
 
 # update locate database
 echo "Updating locate's database."
 updatedb
+
+# icon cache
+gtk-update-icon-cache /usr/share/icons/Paper/
 
 # login conf
 echo "Configuring new loging theme."
@@ -94,5 +97,7 @@ su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     #wallpaper
     #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s /usr/share/backgrounds/wallpaper.jpg -t string -n
     #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /usr/share/backgrounds/wallpaper.jpg
+    
+cp --remove-destination whiskermenu-1.rc $HOME/.config/xfce4/panel/
 
 notify-send -i appointment -u critical "You may need to log out to enjoy the new configuration"
