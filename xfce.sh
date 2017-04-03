@@ -38,6 +38,14 @@ wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libre
 # TODO add modification in config file to use the icons Papirus Dark
 # http://askubuntu.com/questions/83605/how-do-i-export-customized-libreoffice-config-files#213757
 
+# set QT theme
+dnf install -y qt5-qtstyleplugins qtcurve-qt5 qt5ct qgnomeplatform
+echo "" >> $HOME/.bashrc
+echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.bashrc
+mkdir $HOME/.config/qt5ct
+cp qt5ct.conf $HOME/.config/qt5ct/qt5ct.conf
+source $HOME/.bashrc
+
 # update locate database
 updatedb
 
