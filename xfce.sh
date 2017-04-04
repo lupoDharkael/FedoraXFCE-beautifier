@@ -20,7 +20,6 @@ dnf install -y \
     git \
     preload \
     libreoffice \
-    clementine \
     tmux \
     gstreamer1-plugin-mpg123 \
     arc-theme \
@@ -35,9 +34,11 @@ echo "" >> $HOME/.bashrc &&
 echo 'export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"' >> $HOME/.bashrc
 
 # libreoffice icon set
+echo "Setting Libreoffice's icon theme."
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
-# TODO add modification in config file to use the icons Papirus Dark
-# http://askubuntu.com/questions/83605/how-do-i-export-customized-libreoffice-config-files#213757
+
+mkdir -p $HOME/.config/libreoffice/4/user/
+cp --remove-destination registrymodifications.xcu $HOME/.config/libreoffice/4/user/registrymodifications.xcu
 
 # set QT theme
 echo "Setting QT theme."

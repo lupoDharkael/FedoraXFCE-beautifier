@@ -14,5 +14,4 @@ If you want aditional functionality check the "misc" folder:
 *Tested on fedora 25 (XFCE spin)*
 
 TODO:
-- Automatic configuration of libreoffice icons (size and theme).
 - Compton configuration/installation.
