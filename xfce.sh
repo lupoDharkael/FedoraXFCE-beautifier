@@ -5,33 +5,21 @@
 #https://github.com/numixproject/numix-icon-theme-circle
  
 dnf config-manager --add-repo http://download.opensuse.org/repositories/home:snwh:paper/Fedora_25/home:snwh:paper.repo
-dnf upgrade -y
-dnf remove -y \
-    leafpad \
-    abiword \
-    gnumeric \
-    pragha
 
-dnf install -y \
-    gimp \
-    vim \
-    mediawriter \
-    htop \
-    git \
-    preload \
-    libreoffice \
-    tmux \
-    gstreamer1-plugin-mpg123 \
-    arc-theme \
-    paper-icon-theme \
-    lightdm-gtk-greeter-settings \
-    breeze-cursor-theme &&
+dnf upgrade -y
+
+REMOVE="leafpad abiword gnumeric pragha"
+dnf remove -y $REMOVE
+
+INSTALL="gimp vim mediawriter htop git preload libreoffice tmux gstreamer1-plugin-mpg123 arc-theme paper-icon-theme lightdm-gtk-greeter-settings breeze-cursor-theme"
+dnf install -y $INSTALL &&
 systemctl enable preload && systemctl start preload
 
 # modify bashrc
 echo "Configuring custom terminal prompt."
 echo "" >> $HOME/.bashrc &&
-echo 'export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"' >> $HOME/.bashrc
+BASHRC='export PS1="\[$(tput bold)\]\[\033[38;5;68m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]@\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;28m\]\h\[$(tput sgr0)\]\[\033[38;5;69m\]]\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;68m\]\w\[$(tput bold)\]:\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"'
+echo $BASHRC >> $HOME/.bashrc
 
 # libreoffice icon set
 echo "Setting Libreoffice's icon theme."
@@ -45,7 +33,7 @@ echo "Setting QT theme."
 dnf install -y qt5-qtstyleplugins qtcurve-qt5 qt5ct qgnomeplatform
 echo "" >> $HOME/.bashrc
 echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.bashrc
-mkdir $HOME/.config/qt5ct
+mkdir -p $HOME/.config/qt5ct
 cp --remove-destination qt5ct.conf $HOME/.config/qt5ct/
 source $HOME/.bashrc
 
@@ -58,7 +46,8 @@ gtk-update-icon-cache /usr/share/icons/Paper/
 
 # login conf
 echo "Configuring new loging theme."
-sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/' /etc/lightdm/lightdm-gtk-greeter.conf
+LOGINTHEME='s/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/'
+sed -i $LOGINTHEME /etc/lightdm/lightdm-gtk-greeter.conf
 
 # deletes cached sessions
 echo "Deleting cached sessions."
