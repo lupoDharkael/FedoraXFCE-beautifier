@@ -23,16 +23,16 @@ echo $BASHRC >> $HOME/.bashrc
 echo "Setting Libreoffice's icon theme."
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
 
-mkdir -p $HOME/.config/libreoffice/4/user/
+mkdir -p $HOME/.config/libreoffice/4/user/ &&
 cp --remove-destination registrymodifications.xcu $HOME/.config/libreoffice/4/user/registrymodifications.xcu
 
 # set QT theme
 echo "Setting QT theme."
-dnf install -y qt5-qtstyleplugins qtcurve-qt5 qt5ct qgnomeplatform
-echo "" >> $HOME/.bashrc
-echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.bashrc
-mkdir -p $HOME/.config/qt5ct
-cp --remove-destination qt5ct.conf $HOME/.config/qt5ct/
+dnf install -y qt5-qtstyleplugins qtcurve-qt5 qt5ct qgnomeplatform &&
+echo "" >> $HOME/.bashrc &&
+echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.bashrc &&
+mkdir -p $HOME/.config/qt5ct &&
+cp --remove-destination qt5ct.conf $HOME/.config/qt5ct/ &&
 source $HOME/.bashrc
 
 # icon cache
@@ -40,8 +40,7 @@ gtk-update-icon-cache /usr/share/icons/Paper/
 
 # login conf
 echo "Configuring new loging theme."
-LOGINTHEME='s/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/'
-sed -i $LOGINTHEME /etc/lightdm/lightdm-gtk-greeter.conf
+sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\ntheme-name = Arc-Dark\nicon-theme-name = Paper\ndefault-user-image = #stellarium/' /etc/lightdm/lightdm-gtk-greeter.conf
 
 # deletes cached sessions
 echo "Deleting cached sessions."
