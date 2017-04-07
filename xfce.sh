@@ -1,8 +1,6 @@
 #! /bin/bash
 
 #cp --remove-destination wallpaper.jpg /usr/share/backgrounds/
-
-#https://github.com/numixproject/numix-icon-theme-circle
  
 dnf config-manager --add-repo http://download.opensuse.org/repositories/home:snwh:paper/Fedora_25/home:snwh:paper.repo
 
@@ -11,7 +9,7 @@ dnf upgrade -y
 REMOVE="leafpad abiword gnumeric pragha"
 dnf remove -y $REMOVE
 
-INSTALL="gimp vim mediawriter htop git preload libreoffice tmux gstreamer1-plugin-mpg123 arc-theme paper-icon-theme lightdm-gtk-greeter-settings breeze-cursor-theme"
+INSTALL="gimp vim htop git preload libreoffice gstreamer1-plugin-mpg123 arc-theme paper-icon-theme lightdm-gtk-greeter-settings breeze-cursor-theme"
 dnf install -y $INSTALL &&
 systemctl enable preload && systemctl start preload
 
@@ -67,10 +65,13 @@ su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     # panels
     xfconf-query -c xfce4-panel -p /panels/panel-2/autohide-behavior -t int -s 2 -n
     xfconf-query -c xfce4-panel -p /panels/panel-2/background-alpha -t int -s 60 -n
-    xfconf-query -c xfce4-panel -p /panels/panel-2/position -s "p=9;x=0;y=0"
+    xfconf-query -c xfce4-panel -p /panels/panel-2/position -s "p=6;x=0;y=0"
     xfconf-query -c xfce4-panel -p /panels/panel-1/autohide-behavior -t int -s 1 -n
     xfconf-query -c xfce4-panel -p /panels/panel-1/position -s "p=10;x=0;y=0"
     xfconf-query -c xfce4-panel -p /plugins/plugin-1 -s "whiskermenu"
+    
+    xfconf-query -c xfce4-panel -p /panels/panel-2/plugin-ids -rR
+    xfconf-query -c xfce4-panel -p /panels/panel-2/plugin-ids -t int -s 10 -t int -s 11 --create
     
     # desktop
     xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-filesystem -t bool -s false -n
@@ -87,6 +88,7 @@ su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     #wallpaper
     #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s /usr/share/backgrounds/wallpaper.jpg -t string -n
     #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /usr/share/backgrounds/wallpaper.jpg
+    
     
 cp --remove-destination whiskermenu-1.rc $HOME/.config/xfce4/panel/
 
