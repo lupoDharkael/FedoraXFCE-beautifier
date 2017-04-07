@@ -35,10 +35,6 @@ mkdir -p $HOME/.config/qt5ct
 cp --remove-destination qt5ct.conf $HOME/.config/qt5ct/
 source $HOME/.bashrc
 
-# update locate database
-echo "Updating locate's database."
-updatedb
-
 # icon cache
 gtk-update-icon-cache /usr/share/icons/Paper/
 
@@ -50,6 +46,11 @@ sed -i $LOGINTHEME /etc/lightdm/lightdm-gtk-greeter.conf
 # deletes cached sessions
 echo "Deleting cached sessions."
 rm -r $HOME/.cache/sessions/
+
+# change screensaver configuration
+echo "Configuring screensaver."
+cp --remove-destination xscreensaver $HOME/.xscreensaver 
+
 
 echo "Configuring xfce4."
 su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
@@ -91,5 +92,9 @@ su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     
     
 cp --remove-destination whiskermenu-1.rc $HOME/.config/xfce4/panel/
+
+# update locate database
+echo "Updating locate's database."
+updatedb
 
 notify-send -i appointment -u critical "You may need to log out to enjoy the new configuration"
