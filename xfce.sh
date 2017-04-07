@@ -70,6 +70,10 @@ su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     xfconf-query -c xfce4-panel -p /panels/panel-1/autohide-behavior -t int -s 1 -n
     xfconf-query -c xfce4-panel -p /panels/panel-1/position -s "p=10;x=0;y=0"
     xfconf-query -c xfce4-panel -p /plugins/plugin-1 -s "whiskermenu"
+    xfconf-query -c xfce4-panel -p /plugins/plugin-8 -t string -s "pulseaudio" -n
+    
+    xfconf-query -c xfce4-panel -p /panels/panel-1/plugin-ids -rR
+    xfconf-query -c xfce4-panel -p /panels/panel-1/plugin-ids -t int -s 1 -t int -s 3 -t int -s 15 -t int -s 4 -t int -s 8 -t int -s 5 -t int -s 6 -t int -s 2 --create
     
     xfconf-query -c xfce4-panel -p /panels/panel-2/plugin-ids -rR
     xfconf-query -c xfce4-panel -p /panels/panel-2/plugin-ids -t int -s 10 -t int -s 11 --create
