@@ -23,7 +23,7 @@ echo $BASHRC >> $HOME/.bashrc
 echo "Setting Libreoffice's icon theme."
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
 
-mkdir -p $HOME/.config/libreoffice/4/user/ &&
+su $1 -c 'mkdir -p $HOME/.config/libreoffice/4/user/' &&
 cp --remove-destination registrymodifications.xcu $HOME/.config/libreoffice/4/user/registrymodifications.xcu
 
 # set QT theme
@@ -31,7 +31,7 @@ echo "Setting QT theme."
 dnf install -y qt5-qtstyleplugins qtcurve-qt5 qt5ct qgnomeplatform &&
 echo "" >> $HOME/.bashrc &&
 echo "export QT_QPA_PLATFORMTHEME=qt5ct" >> $HOME/.bashrc &&
-mkdir -p $HOME/.config/qt5ct &&
+su $1 -c 'mkdir -p $HOME/.config/qt5ct' &&
 cp --remove-destination qt5ct.conf $HOME/.config/qt5ct/ &&
 source $HOME/.bashrc
 
