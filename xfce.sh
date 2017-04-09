@@ -6,7 +6,7 @@ dnf config-manager --add-repo http://download.opensuse.org/repositories/home:snw
 
 dnf upgrade -y
 
-REMOVE="leafpad abiword gnumeric pragha"
+REMOVE="leafpad abiword gnumeric pragha xscreensaver-base"
 dnf remove -y $REMOVE
 
 INSTALL="gimp vim htop git preload libreoffice gstreamer1-plugin-mpg123 arc-theme paper-icon-theme lightdm-gtk-greeter-settings breeze-cursor-theme"
@@ -46,11 +46,7 @@ sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\nthe
 echo "Deleting cached sessions."
 rm -r $HOME/.cache/sessions/
 
-# change screensaver configuration
-echo "Configuring screensaver."
-cp --remove-destination xscreensaver $HOME/.xscreensaver 
-
-
+# xfconf-query
 echo "Configuring xfce4."
 su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
     
