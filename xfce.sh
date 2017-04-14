@@ -46,6 +46,11 @@ sed -i 's/.*/[greeter]\nbackground = \/usr\/share\/backgrounds\/default.png\nthe
 echo "Deleting cached sessions."
 rm -r $HOME/.cache/sessions/
 
+# configures terminal
+echo "Configuring terminal"
+su $1 -c 'mkdir -p $HOME/.config/xfce4/terminal' &&
+cp --remove-destination terminalrc $HOME/.config/xfce4/terminal/
+
 # xfconf-query
 echo "Configuring xfce4."
 su $1 -m -c 'xfconf-query -c xfce4-session -p /general/SaveOnExit -s false -n
